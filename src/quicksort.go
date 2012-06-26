@@ -5,10 +5,11 @@ import (
 	"bytes"
 	"fmt"
 	"io"
-	"log"
-	//	"math/rand"
+	//	"log"
+	"math/rand"
 	"os"
 	"strconv"
+	"time"
 )
 
 var comparisions uint
@@ -45,14 +46,14 @@ func readLines(path string) (lines []int, err error) {
 }
 
 func partition(array []int) (j int) {
-
-	comparisions = comparisions + uint(len(array)) - 1
-
-	//	pivot := rand.Int() % len(array)
-	pivot := len(array) - 1
+	r := rand.Int()
+	pivot := r % len(array)
+	pivotValue := array[pivot]
+	fmt.Println("rand", r, "lenarray", len(array), "pivot", pivot, "pivotValue", pivotValue)
+	//	pivot := len(array) - 1
 
 	//	fmt.Println("pivot...", pivot)
-	pivotValue := array[pivot]
+
 	//	fmt.Println("pivotvalue...", pivotValue)
 	array[0], array[pivot] = array[pivot], array[0]
 	//	fmt.Println("move to front...", array)
@@ -78,20 +79,26 @@ func quicksort(data []int) {
 		return
 	}
 
-	//	fmt.Println("before parition...", data)
+	comparisions = comparisions + 1
+
+	fmt.Println("before parition...", data)
 	newPivotIndex := partition(data)
 	quicksort(data[0:newPivotIndex])
-	begin := newPivotIndex
-	end := len(data)
-	quicksort(data[begin:end])
+	if len(data) > 2 {
+		begin := newPivotIndex
+		end := len(data)
+		quicksort(data[begin:end])
+	}
 }
 
 func main() {
-	//	s := [...]int{1, 5, 8, 3, 2, 9, 0, 4, 6, 7}
-	s, err := readLines("src/IntegerArray.txt")
-	if err != nil {
-		log.Fatal(err)
-	}
+	rand.Seed(time.Now().Unix())
+	s := [...]int{1, 5, 8, 3, 2, 9, 0, 4, 6, 7}
+	//	s, err := readLines("src/IntegerArray.txt")
+	//	if err != nil {
+	//		log.Fatal(err)
+	//	}
 	quicksort(s[0:])
 	fmt.Println(comparisions)
+	fmt.Println(s)
 }
