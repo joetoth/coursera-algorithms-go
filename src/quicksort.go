@@ -45,16 +45,17 @@ func readLines(path string) (lines []int, err error) {
 	return
 }
 
+type  IndexValue struct {
+   index int
+       value int
+      }
+
 func medianPivot(array []int) (medianIndex int) {
   mid := (len(array) / 2)
-  
 
-var IndexValue struct {
-  index int
-  value int
-}
-
-var (first, median, last IndexValue)
+  var (median IndexValue)
+  first := IndexValue{0, array[0]}
+  last := IndexValue{len(array) - 1, array[len(array) - 1]}
 
   if len(array)%2 == 0 {
     median.value = array[mid-1]
@@ -76,7 +77,7 @@ var (first, median, last IndexValue)
       three[0], three[1] = three[1], three[0]
   }
 
-  fmt.Println("sorted three", three)
+  // fmt.Println("sorted three", three)
 
   medianIndex = three[1].index
 
@@ -88,7 +89,18 @@ func partition(array []int) (j int) {
   comparisions = comparisions + uint(len(array)) - 1
 	// r := rand.Int()
 	//pivot := r % len(array)
+
+  // First Pivot
+  // pivot := 0
+
+  // Last Pivot
+  // pivot := len(array) - 1
+
+  // Median Pivot
   pivot := medianPivot(array)
+
+
+
 	pivotValue := array[pivot]
 	//fmt.Println("lenarray", len(array), "pivot", pivot, "pivotValue", pivotValue)
   //os.Exit(1)
@@ -133,11 +145,11 @@ func quicksort(data []int) {
 
 func main() {
 	rand.Seed(time.Now().Unix())
-	 s := [...]int{1, 5, 8, 3, 2, 9, 0, 7, 6, 4}
-	//	s, err := readLines("IntegerArray.txt")
-	//if err != nil {
-	//		log.Fatal(err)
-	//	}
+	 // s := [...]int{1, 5, 8, 3, 2, 9, 0, 7, 6, 4}
+	 s, err := readLines("IntegerArray.txt")
+	if err != nil {
+			log.Fatal(err)
+		}
   log.Println("cat")
 	quicksort(s[0:])
 	fmt.Println(s)
