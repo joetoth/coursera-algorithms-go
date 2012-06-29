@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-var comparisions uint
+var comparisions, xx uint
 
 // Read a whole file into the memory and store it as array of lines
 func readLines(path string) (lines []int, err error) {
@@ -77,7 +77,7 @@ func medianPivot(array []int) (medianIndex int) {
       three[0], three[1] = three[1], three[0]
   }
 
-  // fmt.Println("sorted three", three)
+  fmt.Println("arraylen", len(array), "sorted three", three)
 
   medianIndex = three[1].index
 
@@ -86,45 +86,33 @@ func medianPivot(array []int) (medianIndex int) {
 
 
 func partition(array []int) (j int) {
-  comparisions = comparisions + uint(len(array)) - 1
-	// r := rand.Int()
-	//pivot := r % len(array)
 
   // First Pivot
   // pivot := 0
 
   // Last Pivot
-  // pivot := len(array) - 1
+  //pivot := len(array) - 1
 
   // Median Pivot
   pivot := medianPivot(array)
 
 
 
+//  comparisions = comparisions + uint(len(array)) - 1
+
 	pivotValue := array[pivot]
-	//fmt.Println("lenarray", len(array), "pivot", pivot, "pivotValue", pivotValue)
-  //os.Exit(1)
-	//	pivot := len(array) - 1
 
-	//	fmt.Println("pivot...", pivot)
-
-	//	fmt.Println("pivotvalue...", pivotValue)
 	array[0], array[pivot] = array[pivot], array[0]
-	//	fmt.Println("move to front...", array)
 
 	j = 1
 	for i := 1; i < len(array); i++ {
+    comparisions = comparisions + 1
 		if array[i] < pivotValue {
-			//			fmt.Println("before swap...", array, "swapping", array[i], array[j])
 			array[i], array[j] = array[j], array[i]
-			//fmt.Println( "i...", i, "j...", j, "swapped...", array)
 			j = j + 1
 		}
 	}
-		//fmt.Println("before final swap...", array)
 	array[0], array[j-1] = array[j-1], array[0]
-		//fmt.Println("paritioned...", array)
-	//os.Exit(0)
 	return
 }
 
@@ -143,16 +131,20 @@ func quicksort(data []int) {
 		quicksort(data[begin:end])
 }
 
+
+
 func main() {
 	rand.Seed(time.Now().Unix())
-	 // s := [...]int{1, 5, 8, 3, 2, 9, 0, 7, 6, 4}
-	 s, err := readLines("IntegerArray.txt")
+   //s := [...]int{0,9,8,7,6,5,4,3,2,1}
+	 //s, err := readLines("IntegerArray.txt")
+	 s, err := readLines("/usr/local/google/home/joetoth/Downloads/data.txt")
+
 	if err != nil {
 			log.Fatal(err)
 		}
   log.Println("cat")
 	quicksort(s[0:])
-	fmt.Println(s)
+	// fmt.Println(s)
 	fmt.Println(comparisions)
   //x := [...]int{-4, 3,1 ,5,1, -4}
   //medianPivot(x[0:])
