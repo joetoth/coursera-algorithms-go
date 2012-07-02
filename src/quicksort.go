@@ -77,7 +77,7 @@ func medianPivot(array []int) (medianIndex int) {
       three[0], three[1] = three[1], three[0]
   }
 
-  fmt.Println("arraylen", len(array), "sorted three", three)
+  // fmt.Println("arraylen", len(array), "sorted three", three)
 
   medianIndex = three[1].index
 
@@ -88,7 +88,7 @@ func medianPivot(array []int) (medianIndex int) {
 func partition(array []int) (j int) {
 
   // First Pivot
-  // pivot := 0
+//  pivot := 0
 
   // Last Pivot
   //pivot := len(array) - 1
@@ -117,7 +117,7 @@ func partition(array []int) (j int) {
 }
 
 func quicksort(data []int) {
-	if len(data) <= 2 {
+	if len(data) <= 1 {
 		return
 	}
 
@@ -135,9 +135,9 @@ func quicksort(data []int) {
 
 func main() {
 	rand.Seed(time.Now().Unix())
-   //s := [...]int{0,9,8,7,6,5,4,3,2,1}
+//   s := [...]int{0,9,8,7,6,5,4,3,2,1}
 	 //s, err := readLines("IntegerArray.txt")
-	 s, err := readLines("/usr/local/google/home/joetoth/Downloads/data.txt")
+	 s, err := readLines("/usr/local/google/home/joetoth/Downloads/datax.txt")
 
 	if err != nil {
 			log.Fatal(err)
